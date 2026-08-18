@@ -1072,12 +1072,12 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <div id="admin-trigger" style="cursor:default;">© 2025 <span>BSSD AGENCY</span> — Tous droits réservés | Cotonou, Bénin 🇧🇯</div>
+    <div>© 2025 <span>BSSD AGENCY</span> — Tous droits réservés | Cotonou, Bénin 🇧🇯 <span id="admin-trigger" style="opacity:0.5; cursor:default; user-select:none;">@</span></div>
     <div>Agent agréé <span>SUNU Assurances Bénin</span></div>
   </div>
 </footer>
 
-<!-- ===== ADMIN PANEL (accès caché : 5 clics sur le copyright ci-dessus) ===== -->
+<!-- ===== ADMIN PANEL (accès caché : appui long sur le @ ci-dessus) ===== -->
 <div class="admin-overlay" id="adminOverlay">
   <div class="admin-box">
     <button class="admin-close" onclick="closeAdmin()">✕</button>
@@ -1191,12 +1191,12 @@
   //    - Active "Firestore Database" en mode production
   //    - Project settings > tes apps > Config → colle l'objet ci-dessous
   const FIREBASE_CONFIG = {
-    apiKey: "TON_API_KEY_ICI",
-    authDomain: "TON_PROJET.firebaseapp.com",
-    projectId: "TON_PROJET_ID",
-    storageBucket: "TON_PROJET.appspot.com",
-    messagingSenderId: "000000000000",
-    appId: "TON_APP_ID_ICI"
+    apiKey: "AIzaSyDtBmBngCrsD24-a74oS5GzLxffRym_69o",
+    authDomain: "assurance-874d6.firebaseapp.com",
+    projectId: "assurance-874d6",
+    storageBucket: "assurance-874d6.firebasestorage.app",
+    messagingSenderId: "350479025107",
+    appId: "1:350479025107:web:edc4d62f76ded54c42e526"
   };
   // ------------------------------------------------------------------
   // Règle de sécurité Firestore recommandée (Firestore > Rules) :
@@ -1255,17 +1255,32 @@
   }
   document.addEventListener('DOMContentLoaded', loadCatalogImages);
 
-  // ----- Déclencheur caché : 5 clics sur le copyright du footer -----
-  let adminClickCount = 0, adminClickTimer = null;
-  document.getElementById('admin-trigger').addEventListener('click', () => {
-    adminClickCount++;
-    clearTimeout(adminClickTimer);
-    adminClickTimer = setTimeout(() => { adminClickCount = 0; }, 2000);
-    if (adminClickCount >= 5) {
-      adminClickCount = 0;
-      openAdmin();
+  // ----- Déclencheur caché : appui long (700ms) sur le @ du footer -----
+  (function() {
+    const trigger = document.getElementById('admin-trigger');
+    let pressTimer = null;
+
+    function startPress(e) {
+      pressTimer = setTimeout(() => {
+        openAdmin();
+      }, 700);
     }
-  });
+    function cancelPress() {
+      clearTimeout(pressTimer);
+    }
+
+    trigger.addEventListener('mousedown', startPress);
+    trigger.addEventListener('mouseup', cancelPress);
+    trigger.addEventListener('mouseleave', cancelPress);
+
+    trigger.addEventListener('touchstart', (e) => { startPress(e); }, { passive: true });
+    trigger.addEventListener('touchend', cancelPress);
+    trigger.addEventListener('touchmove', cancelPress);
+    trigger.addEventListener('touchcancel', cancelPress);
+
+    // Empêche le menu contextuel / la sélection sur appui long mobile
+    trigger.addEventListener('contextmenu', (e) => e.preventDefault());
+  })();
 
   function openAdmin() {
     document.getElementById('adminOverlay').classList.add('open');
