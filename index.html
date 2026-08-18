@@ -284,7 +284,8 @@
     width: calc(100% + 5rem);
     margin: -2.5rem -2.5rem 1.5rem;
     height: 190px;
-    object-fit: cover;
+    object-fit: contain;
+    background: #12100e;
     display: block;
   }
   .sante .ins-icon-wrap { background: rgba(231,76,60,0.1); }
@@ -678,8 +679,8 @@
   .admin-error { color: #c0392b; font-size: 0.85rem; margin-bottom: 0.8rem; }
   .admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 1rem; }
   .admin-card { border: 1px solid #e5e5e5; border-radius: 12px; padding: 1rem; text-align: center; }
-  .admin-card .preview { width: 100%; height: 110px; object-fit: cover; border-radius: 8px; background: #f0f0f0; margin-bottom: 0.6rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
-  .admin-card .preview img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+  .admin-card .preview { width: 100%; height: 110px; object-fit: contain; border-radius: 8px; background: #f0f0f0; margin-bottom: 0.6rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+  .admin-card .preview img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
   .admin-card label { font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem; }
   .admin-card input[type="file"] { font-size: 0.75rem; width: 100%; }
   .admin-status { font-size: 0.75rem; margin-top: 0.4rem; color: var(--blue); }
